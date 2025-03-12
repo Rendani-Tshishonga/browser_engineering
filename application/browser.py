@@ -13,7 +13,7 @@ We will programatically create a telnet method to help us:
 
 """
 
-class URL:
+class Browser:
     def __init__(self, url):
         self.scheme, url = url.split("://", 1)
         assert self.scheme in ["http", "https"]
@@ -61,7 +61,8 @@ class URL:
         return content
 
     @staticmethod
-    def show(body):
+    def lex(body):
+        text = ""
         in_tag = False
         for c in body:
             if c == "<":
@@ -69,10 +70,6 @@ class URL:
             elif c == ">":
                 in_tag = False
             elif not in_tag:
-                print(c, end="")
-
-    @staticmethod
-    def load(url):
-        body = url.request()
-        show(body)
+                text =+ c
+        return text
 
